@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.3/cerulean/bootstrap.min.css"
+        integrity="sha512-vaImhtQoaCXvevCM/UK+8ND/df0kiQWLtR65wgq0AWShEXLpWHMve0oGgU0q1gq1MbbyEuAhMMlqNmZd7s7wTQ=="
+        crossorigin="anonymous" />
+
+    <title>Weather App</title>
+</head>
+
+<body>
+    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <div class="container">
+            <a href="../" class="navbar-brand">Weather App <span style="color: rgb(39, 117, 161);">
+                    <strong>- Django Framework</strong>
+                </span>
+            </a>
+            <a href="https://openweathermap.org" class="navbar-tech"> OpenWeather - Get your API </a>
+        </div>
+    </div>
+
+    <br /><br /><br>
+    <div id="jumbotron" class="jumbotron" style="text-align: center; margin-top: -20px">
+        <h1 class="display-5">Ob-havo (°C) </h1>
+        <h5><i> "Dunyodagi istalgan shaharning nomini to'g'ri yozing" <|>Created by Jasurbek Karimov</i></h5>
+            
+        <img src="{% static 'images/image.png' %}" class="image" style="width: 150px; margin-bottom: -1100px;">
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <form method="post" class="col-md">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="text" class="form-control" name="city" placeholder="Choose Your City ..." required>
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+    </nav>
+    <br><br>
+    <div class="row">
+        {% if error %}
+            <div class="col alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% else %}
+        {% if country_code and coordinate and temp and pressure and humidity %}
+        <div class="col d-flex justify-content-center">
+            <div class="card text-white bg-light mb-6">
+                <div class="card-body">
+                  <h4><span class="badge badge-primary" style="font-size: 1em; color: #808080;">Mamlakat :</span> {{ country_code }}</h4>
+                  <h4><span class="badge badge-primary" style="font-size: 1em; color: #808080;">Koordinatalar [X,Y] :</span> {{ coordinate }}</h4>
+                  <h4><span class="badge badge-primary" style="font-size: 1em; color: #808080;">Tselsiy bo'yicha harorat :</span> {{ temp }}</h4>
+                  <h4><span class="badge badge-primary" style="font-size: 1em; color: #808080;">Bosim :</span> {{ pressure }}</h4>
+                  <h4><span class="badge badge-primary" style="font-size: 1em; color: #808080;">Namlik :</span> {{ humidity }}</h4>
+                  <h4><span class="badge badge-primary" style="font-size: 1em; color: #808080;">Prognoz:</span> {{ main }}<img src="http://openweathermap.org/img/w/{{ icon }}.png" alt="Image" style="width:50px"></h4>
+                  <h4><span class="badge badge-primary" style="font-size: 1em; color: #808080;">Havo xolati :</span> {{ description }}</h4>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+</body>
+
+</html>
