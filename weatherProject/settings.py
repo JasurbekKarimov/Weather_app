@@ -26,7 +26,7 @@ SECRET_KEY = 'a5uon=4d^ji)5g2q^h@j&6&2^$lb7n!mfzws-uhy++t!=2*r5b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [' WeatherProject.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['weather-app-5-w5wu.onrender.com']
 
 
 # Application definition
